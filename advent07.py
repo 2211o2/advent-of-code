@@ -1,10 +1,8 @@
-from collections import defaultdict #
-
 def main():
     with open('inputs/input07', 'r', encoding="utf-8") as f:
         lines = f.readlines()
         
-    directories = defaultdict(int)
+    directories = {}
     curr_dir = []
 
     for l in lines:
@@ -14,11 +12,9 @@ def main():
             if dir_name == "..":
                 curr_dir.pop()
             elif dir_name == "/":
-                curr_dir = ["root"]
+                curr_dir = [""]
             else:
                 curr_dir.append(dir_name)
-
-            print(curr_dir)
 
         elif l.startswith("$ ls"):
             filename = '/'.join(curr_dir)
@@ -27,15 +23,17 @@ def main():
                 directories[filename] = 0
 
         else:
-            if l.split()[0].isnumeric():
-                directories['/'.join(curr_dir)] += int(l.split()[0])
+            size = l.split()[0]
+            if size.isnumeric():
+                for i in range(1, len(curr_dir) + 1):
+                    directories[ '/'.join(curr_dir[:i]) ] += int(size)
 
     print(directories)
     print(sum([x for x in directories.values() if x <= 100_000]))
 
 def part_two(directories):
-    available = 70000000
-    need      = 30000000
+    available = 70_000_000
+    need      = 30_000_000
 
 if __name__ == '__main__':
     main()
