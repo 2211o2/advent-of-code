@@ -17,7 +17,7 @@ def parse_input(lines):
             if dir_name == "..":
                 curr_dir.pop()
             elif dir_name == "/":
-                curr_dir = [""]
+                curr_dir = ["root"]
             else:
                 curr_dir.append(dir_name)
 
@@ -39,8 +39,11 @@ def part_one(directories):
     print(sum([x for x in directories.values() if x <= 100_000]))
 
 def part_two(directories):
-    available   = 70_000_000
-    needed      = 30_000_000
+    total_used = directories["root"]
+    free_space = 70_000_000 - total_used
+    to_remove = 30_000_000 - free_space
+
+    print(min([x for x in directories.values() if x >= to_remove]))
 
 if __name__ == '__main__':
     main()
