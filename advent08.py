@@ -21,11 +21,6 @@ def main():
 
             current_tree = trees[i][j]
 
-            # left_trees  = [ trees[i][j-x] for x in range(1, j + 1) if trees[i] ]
-            # right_trees = [ trees[i][j+x] for x in range(1, len(trees[0]) - j) ]
-            # above_trees = [ trees[i-x][j] for x in range(1, i + 1) ]
-            # below_trees = [ trees[i+x][j] for x in range(1, len(trees) - i) ]
-
             # if all(row[0:i] < current_tree) or all(row[i+1:] < current_tree) or all(col[0:j] < current_tree) or all(col[j+1:] < current_tree):
             #     total += 1
 
