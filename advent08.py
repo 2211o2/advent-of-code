@@ -1,5 +1,5 @@
-def main():
-    with open('inputs/test08', 'r', encoding="utf-8") as f:
+def main(filename):
+    with open(filename, 'r', encoding="utf-8") as f:
         lines = f.readlines()
     
     trees = [ [ int(t) for t in line.strip() ] for line in lines]
@@ -11,23 +11,23 @@ def main():
     # removing edge cols
     for i in range(len(trees)):
         trees[i].remove(trees[i][0])
-        trees[i].remove(trees[i][len(trees[0])-1])
+        trees[i].remove(trees[i][len(trees[i])-1])
 
-    for i in range(0, len(trees)-1):
-        row = trees[i]
-        
-        for j in range(0, len(trees[0])-1):
+    for i in range(0, len(trees)):
+        row = trees[i]        
+        for j in range(0, len(trees[0])):
             col = list(zip(*trees))[j]
-
             current_tree = trees[i][j]
 
-            # if all(row[0:i] < current_tree) or all(row[i+1:] < current_tree) or all(col[0:j] < current_tree) or all(col[j+1:] < current_tree):
-            #     total += 1
+            if max(above_trees) < current_tree or max(below_trees) < current_tree or max(left_trees) < current_tree or max(right_trees) < current_tree:
+                visible += 1
 
-    print(visible) 
-
-def check_visibility(current_tree, line, i):
-    return all(line[0:i] < current_tree) or all(line[i+1:] < current_tree)
+    print(visible)
+    return visible
 
 if __name__ == '__main__':
-    main()
+    main('inputs/test08')
+    # main('inputs/input08')
+
+assert(main('inputs/test08') == 21)
+# assert(main('inputs/input08') == 1816)
